@@ -30,14 +30,14 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity click_pipeline is
-	port(a_req, b_ack, a_data, reset, set : in std_logic;
+	port(a_req, b_ack, a_data, reset, set, init_clk : in std_logic;
 	a_ack, b_req, b_data : out std_logic);
 end click_pipeline;
 
 architecture Behavioral of click_pipeline is
 
 component combo
-	port(a_req, b_ack, a_ack : in std_logic;
+	port(a_req, b_ack, a_ack, init_clk : in std_logic;
 	combo_out : out std_logic);
 end component;
 
@@ -62,6 +62,7 @@ combo_i : combo port map (
 	a_req => a_req,
 	b_ack => b_ack,
 	a_ack => b_req_internal,
+	init_clk => init_clk,
 	combo_out => combo_out_internal
 	);
 

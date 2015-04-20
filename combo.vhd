@@ -30,13 +30,13 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity combo is
-	port(a_req, b_ack, a_ack : in std_logic;
+	port(a_req, b_ack, a_ack, init_clk : in std_logic;
 	combo_out : out std_logic);
 end combo;
 
 architecture Behavioral of combo is
 
 begin
-	combo_out <= (not a_req and a_ack and b_ack) or (a_req and not a_ack and not b_ack);
+	combo_out <= (not a_req and a_ack and b_ack) or (a_req and not a_ack and not b_ack) or init_clk;
 end Behavioral;
 
