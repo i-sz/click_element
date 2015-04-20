@@ -30,7 +30,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity click_pipeline is
-	port(a_req, b_ack, a_data : in std_logic;
+	port(a_req, b_ack, a_data, reset, set : in std_logic;
 	a_ack, b_req, b_data : out std_logic);
 end click_pipeline;
 
@@ -42,7 +42,7 @@ component combo
 end component;
 
 component dflop
-	port(clk, data : in std_logic;
+	port(clk, data, reset, set : in std_logic;
 	Q : out std_logic);
 end component;
 
@@ -68,13 +68,17 @@ combo_i : combo port map (
 dflop_data : dflop port map (
 	clk => combo_out_internal,
 	data => a_data,
-	Q => b_data
+	Q => b_data,
+	reset => reset,
+	set => set
 	);
 	
 dflop_ctl : dflop port map (
 	clk => combo_out_internal,
 	data => not_b_req_internal,
-	Q => b_req_internal
+	Q => b_req_internal,
+	reset => reset,
+	set => set
 	);
 
 end Behavioral;
