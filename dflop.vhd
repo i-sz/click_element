@@ -30,7 +30,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity dflop is
-	port(clk, data : in std_logic;
+	port(clk, data, reset, set : in std_logic;
 	Q : out std_logic);
 end dflop;
 
@@ -40,7 +40,15 @@ begin
 	process(clk)
 	begin
 		if (clk'event and clk='1') then
-			Q <= data;
+			if (reset = '1') then
+				Q <= '0'; 
+			else
+				if (set = '1') then 
+					Q <= '1';
+				else
+					Q <= data;
+				end if;
+			end if;
 		end if;
 	end process;
 end Behavioral;
