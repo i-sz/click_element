@@ -17,18 +17,20 @@ architecture testbench of tb_three_stage_ring is
 
 component three_stage_ring
 port(
-	init : in std_logic;
+	init, init_clk : in std_logic;
 	output : out std_logic
 );
 end component;
 
 signal init_s : std_logic;
+signal init_clk_s : std_logic;
 signal output_s : std_logic;
 
 begin
 
 dut : three_stage_ring port map(
 	init => init_s,
+	init_clk => init_clk_s,
 	output => output_s
 );
 
@@ -39,7 +41,10 @@ init_s <= '0';
 wait for 10 ns;
 init_s <= '1';
 wait for 20 ns;
+init_clk_s <= 1;
+wait for 20 ns;
 init_s <= '0';
+init_clk_s <= 0;
 end process;
 	   
   
