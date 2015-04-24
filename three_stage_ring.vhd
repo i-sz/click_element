@@ -31,7 +31,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity three_stage_ring is
 port(
-	init, init_clk : in std_logic;
+	init, init_clk, set_3, reset_3, init_clk_3 : in std_logic;
 	output : out std_logic
 );
 
@@ -81,12 +81,13 @@ click_pipeline_3 : click_pipeline port map (
 	b_ack => ack_3,
 	a_data => data_2,
 	b_data => data_3,
-	reset => '0',
-	set => init,
-	init_clk => init_clk
+	reset => reset_3,
+	set => set_3,
+	init_clk => init_clk_3
 	);
 
 output <= data_3;
 
 end Behavioral;
+
 
