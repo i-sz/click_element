@@ -37,14 +37,17 @@ dut : three_stage_ring port map(
 process
 begin
 
+init_clk_s <='0';
 init_s <= '0';
-wait for 10 ns;
+wait for 5 ns;
 init_s <= '1';
-wait for 20 ns;
+wait for 10 ns;
 init_clk_s <= '1';
-wait for 20 ns;
+wait for 5 ns;
 init_s <= '0';
 init_clk_s <= '0';
+wait for 120 ns;
+
 end process;
 	   
   
