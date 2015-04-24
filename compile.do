@@ -38,6 +38,19 @@ vcom -quiet  tb_three_stage_ring.vhd
 
 vsim  -novopt tb_three_stage_ring
 
+add wave -noupdate /tb_three_stage_ring/dut/init
+add wave -noupdate /tb_three_stage_ring/dut/init_clk
+add wave -noupdate /tb_three_stage_ring/dut/output
+add wave -noupdate /tb_three_stage_ring/dut/ack_1
+add wave -noupdate /tb_three_stage_ring/dut/ack_2
+add wave -noupdate /tb_three_stage_ring/dut/ack_3
+add wave -noupdate /tb_three_stage_ring/dut/req_1
+add wave -noupdate /tb_three_stage_ring/dut/req_2
+add wave -noupdate /tb_three_stage_ring/dut/req_3
+add wave -noupdate /tb_three_stage_ring/dut/data_1
+add wave -noupdate /tb_three_stage_ring/dut/data_2
+add wave -noupdate /tb_three_stage_ring/dut/data_3
+
 run 200 ns
 
 ################################################################
