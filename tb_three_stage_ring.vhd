@@ -41,10 +41,10 @@ init_s <= '0';
 wait for 10 ns;
 init_s <= '1';
 wait for 20 ns;
-init_clk_s <= 1;
+init_clk_s <= '1';
 wait for 20 ns;
 init_s <= '0';
-init_clk_s <= 0;
+init_clk_s <= '0';
 end process;
 	   
   
