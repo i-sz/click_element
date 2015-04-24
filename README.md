@@ -11,3 +11,8 @@ Implementation of data-driven asynchronous circuits using click elements
 
     reset
     run 400 ns
+
+
+TO DO LIST:
+
+add delay on b.req and a.ack, find delay value. possibly at the click_pipeline stage
