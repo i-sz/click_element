@@ -36,7 +36,11 @@ end combo;
 
 architecture Behavioral of combo is
 
+signal delayed_a_ack :  std_logic;
+
 begin
-	combo_out <= (not a_req and a_ack and b_ack) or (a_req and not a_ack and not b_ack) or init_clk;
+  delayed_a_ack <= a_ack after 5 ns;
+	combo_out <= (not a_req and delayed_a_ack and b_ack) or (a_req and not delayed_a_ack and not b_ack) or init_clk;
 end Behavioral;
+
 
