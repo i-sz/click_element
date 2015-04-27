@@ -55,7 +55,7 @@ signal combo_out_internal : std_logic;
 begin
 
 not_b_req_internal <= not b_req_internal;
-b_req <= b_req_internal;
+b_req <= b_req_internal after 8 ns;
 a_ack <= b_req_internal;
 
 combo_i : combo port map (
@@ -83,4 +83,5 @@ dflop_ctl : dflop port map (
 	);
 
 end Behavioral;
+
 
