@@ -50,8 +50,6 @@ signal b_req_internal : std_logic;
 signal not_b_req_internal : std_logic;
 
 signal combo_out_internal : std_logic;
-signal data_internal: std_logic;
-signal b_data_s : std_logic;
 
 begin
 
@@ -80,17 +78,8 @@ dflop_ctl : dflop port map (
 	
 -- Data FF removed to keep fork control-only
 
-dflop_data : dflop port map (
-	clk => combo_out_internal,
-	data => a_data,
-	Q => b_data_s,
-	reset => reset,
-	set => '0'
-	);
-b_data2 <= b_data_s;
-b_data1 <= b_data_s;
+b_data2 <= a_data;
+b_data1 <= a_data;
 
 	
 end Behavioral;
-
-
