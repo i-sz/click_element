@@ -15,7 +15,7 @@ end top_fibonacci;
 
 architecture testbench of top_fibonacci is
 
-component three_stage_ring_fb is
+component two_stage_ring_fb is
 port(
 	init, init_clk, set_3, reset_3, init_clk_3 : in std_logic;
 	a_req_i, b_ack_i, data_i : in std_logic;
@@ -59,8 +59,8 @@ signal req_5 : std_logic;
 
 begin
 
--- First stage of three click elements
-ringA : three_stage_ring_fb port map(
+-- First stage of two click elements
+ringA : two_stage_ring_fb port map(
 	a_req_i => req_5, 
 	b_ack_i => ack_1, 
 	data_i => data_5,
@@ -74,8 +74,8 @@ ringA : three_stage_ring_fb port map(
 	init_clk_3 => init_clk_3_s
 );
 
--- Second stage of three click elements
-ringB : three_stage_ring_fb port map(
+-- Second stage of two click elements
+ringB : two_stage_ring_fb port map(
 	a_req_i => req_2, 
 	b_ack_i => ack_4, 
 	data_i => data_2, 
@@ -122,7 +122,7 @@ adder : click_adder port map(
 process
 begin
 
--- Initialize all three click elements to 0
+-- Initialize both click elements to 0
 init_clk_s <='0';
 init_s <= '0';
 set_3_s <= '0';
@@ -141,7 +141,7 @@ init_clk_s <= '0';
 init_clk_3_s <= '0';
 wait for 35 ns;
 
--- Fire request on the third click element
+-- Fire request on the second click element
 set_3_s <= '1';
 wait for 35 ns;
 init_clk_3_s <= '1';
@@ -152,8 +152,5 @@ set_3_s <= '0';
 wait for 200 ns;
 
 end process;
-	   
-  
 
 end testbench;
-
