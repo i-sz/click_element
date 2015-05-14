@@ -15,6 +15,7 @@ Implementation of data-driven asynchronous circuits using click elements
     reset
     run 400 ns
 
+*To stop the optimization: End simulation; click on "work" directory; Compile -> Compiler Options, check "Disable optimizations..." and uncheck "Use vopt flow," OK; Compile -> Compile, select everything, make sure "Compile selected files together" is checked, compile; Select top_fibonacci, select Simulate without Optimization*
 
 TO DO LIST:
 
