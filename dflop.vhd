@@ -30,8 +30,10 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity dflop is
-	port(clk, data, reset, set : in std_logic;
-	Q : out std_logic);
+	port(clk, reset, set : in std_logic; 
+	data : in std_logic_vector(3 downto 0); 
+	Q : out std_logic_vector(3 downto 0)
+	);
 end dflop;
 
 architecture Behavioral of dflop is
@@ -41,10 +43,10 @@ begin
 	begin
 		if (clk'event and clk='1') then
 			if (reset = '1') then
-				Q <= '0'; 
+				Q <= "0000"; 
 			else
 				if (set = '1') then 
-					Q <= '1';
+					Q <= "0001";
 				else
 					Q <= data;
 				end if;
