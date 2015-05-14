@@ -32,8 +32,10 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity three_stage_ring_fb is
 port(
 	init, init_clk, set_3, reset_3, init_clk_3 : in std_logic;
-	a_req_i, b_ack_i, data_i : in std_logic;
-	a_ack_o, b_req_o, data_o : out std_logic
+	a_req_i, b_ack_i : in std_logic;
+	data_i : in std_logic_vector(3 downto 0);
+	a_ack_o, b_req_o : out std_logic; 
+	data_o : out std_logic_vector(3 downto 0)
 );
 
 
@@ -42,13 +44,16 @@ end three_stage_ring_fb;
 architecture Behavioral of three_stage_ring_fb is
 
 component click_pipeline
-	port(a_req, b_ack, a_data, reset, set, init_clk : in std_logic;
-	a_ack, b_req, b_data : out std_logic);
+	port(a_req, b_ack, reset, set, init_clk : in std_logic; 
+	a_data : in std_logic_vector(3 downto 0);
+	a_ack, b_req : out std_logic; 
+	b_data : out std_logic_vector(3 downto 0)
+	);
 end component;
 
 signal ack_1, ack_2, ack_3 : std_logic;
 signal req_1, req_2, req_3 : std_logic;
-signal data_1, data_2, data_3 : std_logic;
+signal data_1, data_2, data_3 : std_logic_vector(3 downto 0);
 
 begin
 click_pipeline_1 : click_pipeline port map (
