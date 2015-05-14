@@ -24,11 +24,13 @@ vlib work
 ################################################################
 
 vcom -quiet  dflop.vhd
+vcom -quiet  dflop_ctrl.vhd
 vcom -quiet  fork_combo.vhd
 vcom -quiet  adder_combo.vhd
 vcom -quiet  click_adder.vhd
 vcom -quiet  fork_click_pipeline.vhd
-vcom -quiet  two_stage_ring_fb.vhd
+vcom -quiet  three_stage_ringA_fb.vhd
+vcom -quiet  three_stage_ring_fb.vhd
 vcom -quiet  top_fibonacci.vhd
 
 # The -quiet option disables output from the vcom command
@@ -41,6 +43,6 @@ vcom -quiet  top_fibonacci.vhd
 vsim  -novopt top_fibonacci
 
 
-run 1000 ns
+run 200 ns
 
 ################################################################
