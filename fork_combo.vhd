@@ -41,6 +41,5 @@ signal delayed_a_ack :  std_logic;
 begin
   delayed_a_ack <= a_ack after 5 ns;
 	combo_out <= (not a_req and delayed_a_ack and b_ack1 and b_ack2) or (a_req and not delayed_a_ack and not b_ack1 and not b_ack2) or init_clk;
+	--(a_req and not delayed_a_ack and not b_ack1 and not b_ack2) 
 end Behavioral;
-
-
