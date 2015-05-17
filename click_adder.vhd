@@ -63,10 +63,11 @@ begin
 
 not_c_req_internal <= not c_req_internal;
 c_req <= c_req_internal after 8 ns;
-a_ack <= c_req_internal;
-b_ack <= c_req_internal;
+-- Assigning a_ack and b_ack with the same delay to give the next Click element a chance to collect the data
+a_ack <= c_req_internal after 8 ns;
+b_ack <= c_req_internal after 8 ns;
 
-c_data <= a_data + b_data; -- Will change to addition after expanding to bus
+c_data <= a_data + b_data;
 
 combo_i : adder_combo port map (
 	a_req => a_req,
@@ -86,5 +87,3 @@ dflop_ctl : dflop_ctrl port map (
 	);
 
 end Behavioral;
-
-
