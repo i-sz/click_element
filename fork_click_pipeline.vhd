@@ -30,8 +30,11 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity fork_click_pipeline is
-	port(a_req, b_ack1, b_ack2, a_data, reset, init_clk : in std_logic;
-	a_ack, b_req1, b_req2, b_data1, b_data2 : out std_logic);
+	port(a_req, b_ack1, b_ack2, reset, init_clk, set : in std_logic;
+	a_data : in std_logic_vector(7 downto 0);  
+	a_ack, b_req1, b_req2 : out std_logic; 
+	b_data1, b_data2 : out std_logic_vector(7 downto 0)
+	);
 end fork_click_pipeline;
 
 architecture Behavioral of fork_click_pipeline is
@@ -42,16 +45,24 @@ component fork_combo
 end component;
 
 component dflop
-	port(clk, data, reset, set : in std_logic;
-	Q : out std_logic);
+	port(clk, reset, set : in std_logic; 
+	data : in std_logic_vector(7 downto 0);
+	Q : out std_logic_vector(7 downto 0)
+	);
+end component;
+
+component dflop_ctrl is
+	port(clk, reset, set : in std_logic; 
+	data : in std_logic; 
+	Q : out std_logic
+	);
 end component;
 
 signal b_req_internal : std_logic;
 signal not_b_req_internal : std_logic;
 
 signal combo_out_internal : std_logic;
-signal data_internal: std_logic;
-signal b_data_s : std_logic;
+signal b_data_s : std_logic_vector(7 downto 0);
 
 begin
 
@@ -70,27 +81,25 @@ combo_i : fork_combo port map (
 	combo_out => combo_out_internal
 	);
 	
-dflop_ctl : dflop port map (
+dflop_ctl : dflop_ctrl port map (
 	clk => combo_out_internal,
 	data => not_b_req_internal,
 	Q => b_req_internal,
 	reset => reset,
-	set => '0'
+	set => set
 	);
 	
 -- Data FF removed to keep fork control-only
-
 dflop_data : dflop port map (
 	clk => combo_out_internal,
 	data => a_data,
 	Q => b_data_s,
 	reset => reset,
-	set => '0'
+	set => set
 	);
+
 b_data2 <= b_data_s;
 b_data1 <= b_data_s;
 
 	
 end Behavioral;
-
-
