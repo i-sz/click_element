@@ -24,10 +24,12 @@ vlib work
 ################################################################
 
 vcom -quiet  dflop.vhd
+vcom -quiet  dflop_ctrl.vhd
 vcom -quiet  fork_combo.vhd
 vcom -quiet  adder_combo.vhd
 vcom -quiet  click_adder.vhd
 vcom -quiet  fork_click_pipeline.vhd
+vcom -quiet  three_stage_ringA_fb.vhd
 vcom -quiet  three_stage_ring_fb.vhd
 vcom -quiet  top_fibonacci.vhd
 
@@ -38,9 +40,10 @@ vcom -quiet  top_fibonacci.vhd
 # The vsim command starts the testbench design unit and runs
 # the simulation
 
+
 vsim  -novopt top_fibonacci
 
+do wave.do
 
-run 200 ns
-
+run 1000 ns
 ################################################################
