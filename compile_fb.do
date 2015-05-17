@@ -42,7 +42,7 @@ vcom -quiet  top_fibonacci.vhd
 
 vsim  -novopt top_fibonacci
 
-
-run 200 ns
+do wave.do
+run 1000 ns
 
 ################################################################
