@@ -31,6 +31,8 @@ vcom -quiet  click_adder.vhd
 vcom -quiet  fork_click_pipeline.vhd
 vcom -quiet  three_stage_ringA_fb.vhd
 vcom -quiet  three_stage_ring_fb.vhd
+vcom -quiet  two_stage_ringA_fb.vhd
+vcom -quiet  two_stage_ring_fb.vhd
 vcom -quiet  top_fibonacci.vhd
 
 # The -quiet option disables output from the vcom command
