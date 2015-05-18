@@ -15,7 +15,7 @@ end top_fibonacci;
 
 architecture testbench of top_fibonacci is
 
-component three_stage_ring_fb is
+component two_stage_ring_fb is
 port(
 	init, init_clk, set_3, reset_3, init_clk_3 : in std_logic;
 	a_req_i, b_ack_i : in std_logic;
@@ -25,7 +25,7 @@ port(
 );
 end component;
 
-component three_stage_ringA_fb is
+component two_stage_ringA_fb is
 port(
 	init, init_clk, set_3, reset_3, init_clk_3, b_ack1, b_ack2 : in std_logic;
 	a_req_i : in std_logic;
@@ -54,6 +54,7 @@ signal data_2 : std_logic_vector(7 downto 0);
 signal data_3 : std_logic_vector(7 downto 0);
 signal data_4 : std_logic_vector(7 downto 0);
 signal data_5 : std_logic_vector(7 downto 0);
+signal delayed_data_5 : std_logic_vector(7 downto 0);
 signal ack_2 : std_logic;
 signal ack_3 : std_logic;
 signal ack_4 : std_logic;
@@ -63,14 +64,18 @@ signal req_3 : std_logic;
 signal req_4 : std_logic;
 signal req_5 : std_logic;
 
+
 begin
 
+-- Delay to allow for two-stage pipelines in ModelSim:
+delayed_data_5 <= data_5 after 5ns;  
+
 -- First stage of three click elements
-ringA : three_stage_ringA_fb port map(
+ringA : two_stage_ringA_fb port map(
 	a_req_i => req_5, 
 	b_ack1 => ack_2,
 	b_ack2 => ack_3,
-	data_i => data_5,
+	data_i => delayed_data_5,
 	a_ack_o => ack_5, 
 	b_req1 => req_2, 
 	b_req2 => req_3, 
@@ -84,7 +89,7 @@ ringA : three_stage_ringA_fb port map(
 );
 
 -- Second stage of three click elements
-ringB : three_stage_ring_fb port map(
+ringB : two_stage_ring_fb port map(
 	a_req_i => req_2, 
 	b_ack_i => ack_4, 
 	data_i => data_2, 
